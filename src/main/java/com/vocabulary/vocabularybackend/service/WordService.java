@@ -16,14 +16,24 @@ public class WordService {
     }
 
     public List<Word> findExactMatchesInEstonian(String word){
-        return wordRepository.findWordExactMatchEstonian(word);
+        return wordRepository.findExactMatchEstonian(word);
     }
 
     public List<Word> findExactMatchesInEnglish(String word){
-        return wordRepository.findWordExactMatchEnglish(word);
+        return wordRepository.findExactMatchEnglish(word);
     }
 
     // replacing 1-2 letters in the search keyword should still yield relevant results
+    // possible solution levenshtein distance
+    // https://www.baeldung.com/java-levenshtein-distance
+    public List<Word> findFuzzyMatchesEstonian(String word){
+        return null;
+    }
+
+    public List<Word> findFuzzyMatchesEnglish(String word){
+        return null;
+    }
+
     public List<Word> findFuzzyMatches(){
         return null;
     }

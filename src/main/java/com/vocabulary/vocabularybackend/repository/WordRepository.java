@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("select w from Word w where lower(w.wordInEstonian) = lower(:word)")
-    List<Word> findWordExactMatchEstonian(@Param(value = "word") String word);
+    List<Word> findExactMatchEstonian(@Param(value = "word") String word);
 
     @Query("select w from Word w where lower(w.wordDefinitionInEnglish) = lower(:word)")
-    List<Word> findWordExactMatchEnglish(@Param(value = "word") String word);
+    List<Word> findExactMatchEnglish(@Param(value = "word") String word);
 }
