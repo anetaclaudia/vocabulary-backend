@@ -13,6 +13,12 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("select w from Word w where lower(w.wordInEstonian) = lower(:word)")
     List<Word> findExactMatchEstonian(@Param(value = "word") String word);
 
-    @Query("select w from Word w where lower(w.wordDefinitionInEnglish) = lower(:word)")
+    @Query("select w from Word w where lower(w.wordInEnglish) = lower(:word)")
     List<Word> findExactMatchEnglish(@Param(value = "word") String word);
+
+    @Query("select w from Word w where abs(length(w.wordInEstonian) - length(:word)) <= 2")
+    List<Word> findFuzzyMatchesEstonian(@Param(value = "word") String word);
+
+    @Query("select w from Word w where abs(length(w.wordInEnglish) - length(:word)) <= 2")
+    List<Word> findFuzzyMatchesEnglish(@Param(value = "word") String word);
 }

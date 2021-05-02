@@ -1,9 +1,12 @@
 package com.vocabulary.vocabularybackend.service;
 
+import com.vocabulary.vocabularybackend.model.Language;
 import com.vocabulary.vocabularybackend.model.Word;
 import com.vocabulary.vocabularybackend.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -15,34 +18,31 @@ public class WordService {
         this.wordRepository = wordRepository;
     }
 
-    public List<Word> findExactMatchesInEstonian(String word){
-        return wordRepository.findExactMatchEstonian(word);
+    public List<Word> getAllWords() {
+        return wordRepository.findAll();
     }
 
-    public List<Word> findExactMatchesInEnglish(String word){
-        return wordRepository.findExactMatchEnglish(word);
+    public List<Word> findExactMatches(String word, Language language) {
+        if (language == Language.EST) return wordRepository.findExactMatchEstonian(word);
+        else if (language == Language.ENG) return wordRepository.findExactMatchEnglish(word);
+        return Collections.emptyList();
     }
 
     // replacing 1-2 letters in the search keyword should still yield relevant results
     // possible solution levenshtein distance
     // https://www.baeldung.com/java-levenshtein-distance
-    public List<Word> findFuzzyMatchesEstonian(String word){
-        return null;
+    public List<Word> findFuzzyMatches(String word, Language language) {
+        List<Word> resultFromRepository = new ArrayList<>();
+        if (language == Language.EST) {
+            resultFromRepository.addAll(wordRepository.findFuzzyMatchesEstonian(word));
+        } else if (language == Language.ENG) {
+            resultFromRepository.addAll(wordRepository.findFuzzyMatchesEnglish(word));
+        }
+
+        return Utils.getFuzzyWords(word, resultFromRepository, language);
     }
 
-    public List<Word> findFuzzyMatchesEnglish(String word){
-        return null;
-    }
-
-    public List<Word> findFuzzyMatches(){
-        return null;
-    }
-
-    public Word saveNewWord(Word word){
-        return null;
-    }
-
-    public Word addNewDefinitionsForWord(Word word){
-        return null;
+    public Word saveWord(Word word) {
+        return wordRepository.save(word);
     }
 }
