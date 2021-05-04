@@ -9,6 +9,5 @@ import java.util.List;
 @Mapper
 public interface WordMapper {
     WordDto wordToWordDto(Word word);
-
     List<WordDto> wordsToDto(List<Word> words);
 }
