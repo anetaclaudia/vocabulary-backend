@@ -1,6 +1,7 @@
 package com.vocabulary.vocabularybackend;
 
 import com.vocabulary.vocabularybackend.controller.WordController;
+import com.vocabulary.vocabularybackend.model.Language;
 import com.vocabulary.vocabularybackend.model.Word;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ class WordControllerTests {
 	private static final ParameterizedTypeReference<List<Word>> LIST_OF_WORDS = new ParameterizedTypeReference<>() {
 	};
 
-	Word testWord = new Word(
+	Word testWordBear = new Word(
 			1L,
 			"karu",
 			"suur, karvane loom, kellele meeldib mesi",
@@ -41,25 +42,43 @@ class WordControllerTests {
 
 			"big, hairy animal, who likes honey");
 
+	Word testWordDonkey = new Word(
+			2L,
+			"eesel",
+			"pisem, tigedam versioon hobusest",
+			"donkey",
+			"a smaller, angrier version of a horse"
+	);
+
+	// /words?word=test&language=ENG
+	// /words?word=test&language=EST
 	@Test
-	void testExample() {
+	void getExistingWordsWhenInputEstonian(){
+		String urlToBeTested = "/words?word=" + testWordBear.getWordInEstonian() + "&language=" + Language.EST;
+		assertGetRequestForALanguage(urlToBeTested, testWordBear);
+	}
+
+	@Test
+	void getExistingWordsWhenInputEnglish(){
+		String urlToBeTested = "/words?word=" + testWordDonkey.getWordInEnglish() + "&language=" + Language.ENG;
+		assertGetRequestForALanguage(urlToBeTested, testWordDonkey);
+	}
+
+	private void assertGetRequestForALanguage(String urlToBeTested, Word testWordDonkey) {
+		wordController.saveWord(testWordDonkey);
 		ResponseEntity<List<Word>> exchange = testRestTemplate.exchange(
-				"/words",
+				urlToBeTested,
 				HttpMethod.GET,
 				null,
 				LIST_OF_WORDS);
-		// exchange.getStatusCode();
-		// exchange.getBody();
-		// assert stuff
+		List<Word> words = assertOk(exchange);
+		assertFalse(words.isEmpty());
+		Word word = words.get(0);
+		assertTrue(wordIsSame(word, testWordDonkey));
 	}
 
 	@Test
-	void getWordsWithBothParamsSet(){
-
-	}
-
-	@Test
-	void getWordsWithOnlyWordParamSet(){
+	void searchForWordsThatDontExistWhenInputEstonian(){
 
 	}
 

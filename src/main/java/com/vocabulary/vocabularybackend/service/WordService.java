@@ -6,7 +6,6 @@ import com.vocabulary.vocabularybackend.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -16,16 +15,6 @@ public class WordService {
 
     public WordService(WordRepository wordRepository) {
         this.wordRepository = wordRepository;
-    }
-
-    public List<Word> getAllWords() {
-        return wordRepository.findAll();
-    }
-
-    public List<Word> findExactMatches(String word, Language language) {
-        if (language == Language.EST) return wordRepository.findExactMatchEstonian(word);
-        else if (language == Language.ENG) return wordRepository.findExactMatchEnglish(word);
-        return Collections.emptyList();
     }
 
     // replacing 1-2 letters in the search keyword should still yield relevant results
