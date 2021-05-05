@@ -12,4 +12,4 @@ The application's front-end is available [here](https://github.com/anetaclaudia/
 ## Prerequisites for running the application
 (i need to add docker, then i can finish this part)
 
-Application also has Swagger added to it. To access it, run the application and open browser at following address: [http://localhost:8080/api/swagger-ui/]
+Application also has Swagger added to it. To access it, run the application and open browser at following address: <http://localhost:8080/api/swagger-ui/>
