@@ -30,8 +30,7 @@ public class WordController {
     @GetMapping
     public List<WordDto> getWords(@RequestParam String word, @RequestParam(defaultValue = "EST") Language language){
         LOGGER.debug("Incoming GET for word: " + word + " in language " + language.toString());
-        List<Word> bla = wordService.findFuzzyMatches(word, language);
-        return mapper.wordsToDto(bla);
+        return mapper.wordsToDto(wordService.findFuzzyMatches(word, language));
     }
 
     @PostMapping

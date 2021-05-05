@@ -32,9 +32,18 @@ public class Word {
     @Size(max = 200)
     private String wordDefinitionInEnglish;
 
+    public Word(String wordInEstonian, String wordDefinitionInEstonian, String wordInEnglish, String wordDefinitionInEnglish) {
+        this.wordInEstonian = wordInEstonian;
+        this.wordDefinitionInEstonian = wordDefinitionInEstonian;
+        this.wordInEnglish = wordInEnglish;
+        this.wordDefinitionInEnglish = wordDefinitionInEnglish;
+    }
+
     @Override
     public String toString() {
         return "wordInEstonian='" + wordInEstonian + '\'' +
                 ", wordInEnglish='" + wordInEnglish;
     }
+
+
 }
