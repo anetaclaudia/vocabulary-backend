@@ -2,7 +2,6 @@ package com.vocabulary.vocabularybackend.service;
 
 import com.vocabulary.vocabularybackend.model.Language;
 import com.vocabulary.vocabularybackend.model.Word;
-import io.swagger.models.auth.In;
 
 import java.util.*;
 import java.util.stream.Collectors;
