@@ -48,6 +48,16 @@ public class DataApplicationInit implements CommandLineRunner {
                 "korge ehitis",
                 "skyscraper", // length 9
                 "tall building");
+        Word tuli = new Word(8L,
+                "tuli",
+                "asi, mis põleb leegitsedes",
+                "fire",
+                "thing that burns");
+        Word turg = new Word(9L,
+                "turg",
+                "koht, kus saab kaubelda",
+                "marketplace",
+                "place, where people are selling things");
 
 
         wordRepository.save(tulp);
@@ -57,5 +67,7 @@ public class DataApplicationInit implements CommandLineRunner {
         wordRepository.save(kulp);
         wordRepository.save(tulu);
         wordRepository.save(pilvelohkuja);
+        wordRepository.save(tuli); // tulp - tuli - 1
+        wordRepository.save(turg); // tulp - turg - 2
     }
 }

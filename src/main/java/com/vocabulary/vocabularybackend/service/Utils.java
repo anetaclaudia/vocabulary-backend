@@ -2,10 +2,10 @@ package com.vocabulary.vocabularybackend.service;
 
 import com.vocabulary.vocabularybackend.model.Language;
 import com.vocabulary.vocabularybackend.model.Word;
+import io.swagger.models.auth.In;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Utils {
     private static final int MAX_DIFFERENCES = 2;
@@ -42,7 +42,7 @@ public class Utils {
     }
 
     static List<Word> getFuzzyWords(String input, List<Word> words, Language language) {
-        List<Word> result = new ArrayList<>();
+        Map<Word, Integer> resultWithDifferences = new HashMap<>();
         for (Word word : words) {
             String wordInLanguage = "";
             if (language == Language.ENG) {
@@ -51,10 +51,24 @@ public class Utils {
                 wordInLanguage = word.getWordInEstonian();
             }
             if (computeLevenshteinDistance(input, wordInLanguage) <= MAX_DIFFERENCES
-                    && !result.contains(word)) {
-                result.add(word);
+                    && !resultWithDifferences.containsKey(word)) {
+                int value = computeLevenshteinDistance(input, wordInLanguage);
+                resultWithDifferences.put(word, value);
             }
         }
-        return result;
+
+        Map<Word, Integer> sortedMap = sortMapAscendingOrder(resultWithDifferences);
+
+        return new ArrayList<>(sortedMap.keySet());
+    }
+
+    static Map<Word, Integer> sortMapAscendingOrder(Map<Word, Integer> input) {
+        return input.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 }
