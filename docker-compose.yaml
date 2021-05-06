@@ -5,8 +5,4 @@ services:
     image: anetaclaudia/vocabulary-backend:latest
     ports:
       - 10000:8080
-#  frontend:
-#    container_name: frontend
-#    image: vocabulary-frontend:latest
-#    ports:
-#      - 80:80
+
