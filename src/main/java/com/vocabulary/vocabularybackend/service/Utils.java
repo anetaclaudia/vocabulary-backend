@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Utils {
     private static final int MAX_DIFFERENCES = 2;
 
+    // https://www.baeldung.com/java-levenshtein-distance
     static int computeLevenshteinDistance(String word, String wordFromDb) {
         int[][] result = new int[word.length() + 1][wordFromDb.length() + 1];
 
@@ -64,7 +65,7 @@ public class Utils {
     static Map<Word, Integer> sortMapAscendingOrder(Map<Word, Integer> input) {
         return input.entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue())
+                .sorted(Map.Entry.<Word, Integer>comparingByValue().thenComparing(Map.Entry.comparingByKey()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,

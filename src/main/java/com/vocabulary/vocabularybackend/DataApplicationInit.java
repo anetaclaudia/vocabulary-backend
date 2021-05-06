@@ -2,17 +2,19 @@ package com.vocabulary.vocabularybackend;
 
 import com.vocabulary.vocabularybackend.model.Word;
 import com.vocabulary.vocabularybackend.repository.WordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataApplicationInit implements CommandLineRunner {
-    @Autowired
-    private WordRepository wordRepository;
+    private final WordRepository wordRepository;
+
+    public DataApplicationInit(WordRepository wordRepository) {
+        this.wordRepository = wordRepository;
+    }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Word tulp = new Word(1L,
                 "tulp",
                 "lill",

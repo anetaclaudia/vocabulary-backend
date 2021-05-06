@@ -17,9 +17,7 @@ public class WordService {
         this.wordRepository = wordRepository;
     }
 
-    // replacing 1-2 letters in the search keyword should still yield relevant results
-    // possible solution levenshtein distance
-    // https://www.baeldung.com/java-levenshtein-distance
+    // find fuzzy matches with up to 2 letter differences
     public List<Word> findFuzzyMatches(String word, Language language) {
         List<Word> resultFromRepository = new ArrayList<>();
         if (language == Language.EST) {

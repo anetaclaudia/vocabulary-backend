@@ -17,9 +17,9 @@ import java.util.List;
 public class WordController {
 
     private final WordService wordService;
+    private final WordMapper mapper = Mappers.getMapper(WordMapper.class);
     private static final Logger LOGGER = LoggerFactory.logger(WordController.class);
 
-    private final WordMapper mapper = Mappers.getMapper(WordMapper.class);
 
     public WordController(WordService wordService) {
         this.wordService = wordService;

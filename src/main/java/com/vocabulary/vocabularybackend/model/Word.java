@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Word {
+public class Word implements Comparable<Word> {
 
     @Id @GeneratedValue
     private Long id;
@@ -46,4 +46,8 @@ public class Word {
     }
 
 
+    @Override
+    public int compareTo(Word o) {
+        return this.wordDefinitionInEstonian.compareTo(o.wordDefinitionInEstonian);
+    }
 }
