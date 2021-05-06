@@ -6,7 +6,8 @@ The application's front-end is available [here](https://github.com/anetaclaudia/
 ## Functionalities
 - User can add words and the definitions in both languages. I decided to add definitions because one word can have different meanings, such as "tulp", which can mean a column and a flower.
 - User can find matches for their input by the given language. In example, when user wants to find English meaning for word "tulp", they have to select the language which the word derives from.
-    - User can find fuzzy matches - in example, when user tries to find matches for word "kulp", but they actually meant "tulp", search results include words that differ from original string up to 2 characters.
+    - Search output also includes fuzzy matches - in example, when user tries to find matches for word "kulp", but they actually meant "tulp", search results include words that differ from original string up to 2 characters.
+    - Search output is sorted - words, which have 0 differences compared to input, are displayed first. 
 
 ## Prerequisites for running the application
 (i need to add docker, then i can finish this part)
