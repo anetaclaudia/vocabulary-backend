@@ -22,8 +22,10 @@ The application's front-end is available [here](https://github.com/anetaclaudia/
 
 ## Technologies used
 - [Spring Boot](https://spring.io/projects/spring-boot)
+- [Swagger UI](https://swagger.io/tools/swagger-ui/)
 - [H2](https://www.h2database.com/html/main.html)
 - [Gradle](https://gradle.org/)
 - [JUnit](https://junit.org/junit5/)
+- [Docker](https://www.docker.com/)
 - [Angular](https://angular.io/)
 - [Bootstrap](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
